@@ -23,24 +23,39 @@ public class Department  implements Serializable{
 	@Column(name = "dept_name")
 	private String deptName;
 	
-	@Column(name = "batch")
+	@ManyToOne
 	private Batch batch;
 	
 	@Column(name = "is_delete")
-	private boolean isDelete;
+	private Boolean isDelete;
 	
 	@ManyToOne
 	@JoinColumn(name = "e_by")
 	private User entryBy;
 	
-	@Column(name = "e_date")
-	private LocalDateTime entryDate;
-	
-	@Column(name = "u_by")
-	private User updateBy;
-	
-	@Column(name = "u_date")
-	private LocalDateTime updateDate;
+	public Department() {
+		super();
+	}
+
+	public Department(Long id, String deptName, Batch batch, Boolean isDelete, User entryBy, LocalDateTime entryDate,
+			User updateBy, LocalDateTime updateDate) {
+		super();
+		this.id = id;
+		this.deptName = deptName;
+		this.batch = batch;
+		this.isDelete = isDelete;
+		this.entryBy = entryBy;
+		this.entryDate = entryDate;
+		this.updateBy = updateBy;
+		this.updateDate = updateDate;
+	}
+
+	@Override
+	public String toString() {
+		return "Department [id=" + id + ", deptName=" + deptName + ", batch=" + batch + ", isDelete=" + isDelete
+				+ ", entryBy=" + entryBy + ", entryDate=" + entryDate + ", updateBy=" + updateBy + ", updateDate="
+				+ updateDate + "]";
+	}
 
 	public Long getId() {
 		return id;
@@ -66,11 +81,11 @@ public class Department  implements Serializable{
 		this.batch = batch;
 	}
 
-	public boolean isDelete() {
+	public Boolean getIsDelete() {
 		return isDelete;
 	}
 
-	public void setDelete(boolean isDelete) {
+	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
 	}
 
@@ -106,29 +121,17 @@ public class Department  implements Serializable{
 		this.updateDate = updateDate;
 	}
 
-	public Department(Long id, String deptName, Batch batch, boolean isDelete, User entryBy, LocalDateTime entryDate,
-			User updateBy, LocalDateTime updateDate) {
-		super();
-		this.id = id;
-		this.deptName = deptName;
-		this.batch = batch;
-		this.isDelete = isDelete;
-		this.entryBy = entryBy;
-		this.entryDate = entryDate;
-		this.updateBy = updateBy;
-		this.updateDate = updateDate;
-	}
-
-	public Department() {
-		super();
-	}
-
-	@Override
-	public String toString() {
-		return "Department [id=" + id + ", deptName=" + deptName + ", batch=" + batch + ", isDelete=" + isDelete
-				+ ", entryBy=" + entryBy + ", entryDate=" + entryDate + ", updateBy=" + updateBy + ", updateDate="
-				+ updateDate + "]";
-	}
+	@Column(name = "e_date")
+	private LocalDateTime entryDate;
 	
+	@ManyToOne
+	@JoinColumn(name = "u_by")
+	private User updateBy;
+	
+	@Column(name = "u_date")
+	private LocalDateTime updateDate;
+
+
+
 	
 }

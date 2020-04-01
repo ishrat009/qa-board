@@ -18,22 +18,13 @@
   <!-- Custom fonts for this template-->
   <link href="${pageContext.request.contextPath }/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-<!-- Daterange picker -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath }/css/daterangepicker/daterangepicker.css">
+
   <link href="${pageContext.request.contextPath }/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-  
   <!-- Custom styles for this template-->
   <link href="${pageContext.request.contextPath }/css/sb-admin-2.min.css" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-        $( function() {
-            $( ".datepicker" ).datepicker({
-                maxDate: "-17y",
-                dateFormat : "dd/mm/yy"
-            });
-        } );
-    </script>
+  <!--    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet"> -->
+         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 
 <body id="page-top">
