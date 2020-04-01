@@ -9,7 +9,6 @@
   <script>
         $( function() {
             $( ".datepicker" ).datepicker({
-                maxDate: "-17y",
                 dateFormat : "dd/mm/yy"
             });
         } );
@@ -96,24 +95,9 @@
     <script>
         $( function() {
             $( ".datepicker" ).datepicker({
-                maxDate: "-17y",
                 dateFormat : "dd/mm/yy"
             });
         } );
     </script>
 
-<!--      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
-      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
-       <script>
-         $(function() {
-            $( ".datepicker" ).datepicker();
-            beforeShowDay : function (date) {
-                var dayOfWeek = date.getDay ();
-                // 0 : Sunday, 1 : Monday, ...
-                if (dayOfWeek == 0 || dayOfWeek == 6) return [false];
-                else return [true];
-             }
-          });
-      
-      </script> -->
