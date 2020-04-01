@@ -27,7 +27,7 @@ public class Batch implements Serializable {
 	private String academicYear;
 	
 	@Column(name = "is_delete")
-	private boolean isDelete;
+	private Boolean isDelete;
 	
 	@ManyToOne
 	@JoinColumn(name = "e_by")
@@ -36,7 +36,8 @@ public class Batch implements Serializable {
 	@Column(name = "e_date")
 	private LocalDateTime entryDate;
 	
-	@Column(name = "u_by")
+	@ManyToOne
+	@JoinColumn(name = "u_by")
 	private User updateBy;
 	
 	@Column(name = "u_date")
@@ -66,11 +67,11 @@ public class Batch implements Serializable {
 		this.academicYear = academicYear;
 	}
 
-	public boolean isDelete() {
+	public Boolean getIsDelete() {
 		return isDelete;
 	}
 
-	public void setDelete(boolean isDelete) {
+	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
 	}
 
@@ -106,28 +107,7 @@ public class Batch implements Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public Batch(Long id, String batchName, String academicYear, boolean isDelete, User entryBy,
-			LocalDateTime entryDate, User updateBy, LocalDateTime updateDate) {
-		super();
-		this.id = id;
-		this.batchName = batchName;
-		this.academicYear = academicYear;
-		this.isDelete = isDelete;
-		this.entryBy = entryBy;
-		this.entryDate = entryDate;
-		this.updateBy = updateBy;
-		this.updateDate = updateDate;
-	}
 
-	public Batch() {
-		super();
-	}
-
-	@Override
-	public String toString() {
-		return "Batch [id=" + id + ", batchName=" + batchName + ", academicYear=" + academicYear + ", isDelete="
-				+ isDelete + ", entryBy=" + entryBy + ", entryDate=" + entryDate + ", updateBy=" + updateBy
-				+ ", updateDate=" + updateDate + "]";
-	}
+	
 	
 }

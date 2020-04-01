@@ -3,13 +3,18 @@ package com.ewsd.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -33,12 +38,12 @@ public class Category implements Serializable{
 	
 	@Column(name = "final_closing_date")
 	private LocalDate finalClosingDate;
-	
+
 	@ManyToOne
 	private Department dept;
 	
 	@Column(name = "is_delete")
-	private boolean isDelete;
+	private Boolean isDelete;
 	
 	@ManyToOne
 	@JoinColumn(name = "e_by")
@@ -47,7 +52,8 @@ public class Category implements Serializable{
 	@Column(name = "e_date")
 	private LocalDateTime entryDate;
 	
-	@Column(name = "u_by")
+	@ManyToOne
+	@JoinColumn(name = "u_by")
 	private User updateBy;
 	
 	@Column(name = "u_date")
@@ -101,11 +107,11 @@ public class Category implements Serializable{
 		this.dept = dept;
 	}
 
-	public boolean isDelete() {
+	public Boolean getIsDelete() {
 		return isDelete;
 	}
 
-	public void setDelete(boolean isDelete) {
+	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
 	}
 
@@ -142,7 +148,7 @@ public class Category implements Serializable{
 	}
 
 	public Category(Long id, String name, LocalDate openingDate, LocalDate closingDate, LocalDate finalClosingDate,
-			Department dept, boolean isDelete, User entryBy, LocalDateTime entryDate, User updateBy,
+			Department dept, Boolean isDelete, User entryBy, LocalDateTime entryDate, User updateBy,
 			LocalDateTime updateDate) {
 		super();
 		this.id = id;
@@ -168,6 +174,9 @@ public class Category implements Serializable{
 				+ ", finalClosingDate=" + finalClosingDate + ", dept=" + dept + ", isDelete=" + isDelete + ", entryBy="
 				+ entryBy + ", entryDate=" + entryDate + ", updateBy=" + updateBy + ", updateDate=" + updateDate + "]";
 	}
+
+
+
 	
 	
 	
