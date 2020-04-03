@@ -19,6 +19,9 @@ public class BatchService {
     @Autowired
     private BatchRepository batchRepository;
     private HibernateConfig hibernateConfig;
+    public BatchService(HibernateConfig hibernateConfig) {
+        this.hibernateConfig = hibernateConfig;
+    }
     public boolean add(Batch batch) {
         if(!exists(batch.getBatchName())) {
             batchRepository.save(batch);
@@ -60,13 +63,14 @@ public class BatchService {
         // TODO Auto-generated method stub
         batchRepository.deleteById(id);
     }
+    //todo:test for edit
     public Optional<Batch> getById(Long id) {
         // TODO Auto-generated method stub
         var terms = batchRepository.getById(id);
         return terms;
     }
 
-    /*public Batch getById(long batchId) {
+    /*public Batch getById(Long batchId) {
 
         var session = hibernateConfig.getSession();
         var transaction = session.getTransaction();
@@ -84,10 +88,11 @@ public class BatchService {
                 )
         );
         var query = session.getEntityManagerFactory().createEntityManager().createQuery(sc);
-        var dept_list = query.getResultList();
+       *//* var dept_list = query.getResultList();
 
         return Optional.ofNullable(dept_list.get(0))
-                .orElseThrow(() -> new ResourceNotFoundException("Tag Not Found With This Id"));
+                .orElseThrow(() -> new ResourceNotFoundException("Tag Not Found With This Id"));*//*
+       return Optional.ofNullable(batchId.)
     }*/
   /*  public void edit(Batch batch) {
         batchRepository.save(batch);

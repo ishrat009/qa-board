@@ -95,13 +95,15 @@ public class BatchController {
         var batchDto = batchService.getById(id);
         var batchRm = new Batch();
         BeanUtils.copyProperties(batchDto, batchRm);
+        batchRm.setBatchName(batchDto.get().getBatchName());
+        batchRm.setAcademicYear(batchDto.get().getAcademicYear());
        // batchRm.setDeptId(catDto.getDept().getId());
        // catRm.setDeptName(catDto.getDept().getDeptName());
        // batchRm.setBatchName(batchDto);
       /*  batchRm.setOpeningDate(Util.getStringDate(batchDto.getOpeningDate(), Util.DOB_DATE_FORMAT));
         batchRm.setClosingDate(Util.getStringDate(batchDto.getClosingDate(), Util.DOB_DATE_FORMAT));
         batchRm.setFinalClosingDate(Util.getStringDate(batchDto.getFinalClosingDate(), Util.DOB_DATE_FORMAT));*/
-        model.addAttribute("catRm", batchRm);
+        model.addAttribute("batch", batchRm);
       //  model.addAttribute("dept_list", departmentService.getAll());
         return "batch/edit";
 
@@ -109,7 +111,7 @@ public class BatchController {
     }
 
     @PostMapping("/batch/edit")
-    public String edit(Model model, @ModelAttribute(name = "batchRm") Batch batchRm) {
+    public String edit(Model model, @ModelAttribute(name = "batch") Batch batchRm) {
         //tagService.edit(cat);
         LocalDateTime update_date = LocalDateTime.now();
         org.springframework.security.core.userdetails.User authenticateduser  = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
