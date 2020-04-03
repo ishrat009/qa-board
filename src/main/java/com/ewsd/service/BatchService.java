@@ -60,7 +60,13 @@ public class BatchService {
         // TODO Auto-generated method stub
         batchRepository.deleteById(id);
     }
-    public Batch getById(long batchId) {
+    public Optional<Batch> getById(Long id) {
+        // TODO Auto-generated method stub
+        var terms = batchRepository.getById(id);
+        return terms;
+    }
+
+    /*public Batch getById(long batchId) {
 
         var session = hibernateConfig.getSession();
         var transaction = session.getTransaction();
@@ -82,8 +88,15 @@ public class BatchService {
 
         return Optional.ofNullable(dept_list.get(0))
                 .orElseThrow(() -> new ResourceNotFoundException("Tag Not Found With This Id"));
-    }
-    public void edit(Batch batch) {
+    }*/
+  /*  public void edit(Batch batch) {
         batchRepository.save(batch);
+    }*/
+    public Batch edit(Batch batch) {
+
+//        TermsAndConditions termCon = new TermsAndConditions();
+//        BeanUtils.copyProperties(terms, termCon);
+       // terms.setTextMessage(terms.getTextMessage());
+        return  batchRepository.save(batch);
     }
 }

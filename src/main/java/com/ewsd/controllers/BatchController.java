@@ -83,7 +83,7 @@ public class BatchController {
         return "batch/show-all";
     }
     @GetMapping("/batch/edit")
-    public String edit_GET(Model model, @RequestParam("id") long id, Authentication authentication) {
+    public String edit_GET(Model model, @RequestParam("id") Long id, Authentication authentication) {
         //	Category cat = tagService.getById(id);
         var userName = authentication.getName();
         org.springframework.security.core.userdetails.User authenticateduser = (org.springframework.security.core.userdetails.User) SecurityContextHolder
@@ -93,21 +93,23 @@ public class BatchController {
         model.addAttribute("username", userName);
 
         var batchDto = batchService.getById(id);
-        var batchRm = new BatchRm();
+        var batchRm = new Batch();
         BeanUtils.copyProperties(batchDto, batchRm);
        // batchRm.setDeptId(catDto.getDept().getId());
        // catRm.setDeptName(catDto.getDept().getDeptName());
-        batchRm.setBatchName(batchDto.getBatchName());
+       // batchRm.setBatchName(batchDto);
       /*  batchRm.setOpeningDate(Util.getStringDate(batchDto.getOpeningDate(), Util.DOB_DATE_FORMAT));
         batchRm.setClosingDate(Util.getStringDate(batchDto.getClosingDate(), Util.DOB_DATE_FORMAT));
         batchRm.setFinalClosingDate(Util.getStringDate(batchDto.getFinalClosingDate(), Util.DOB_DATE_FORMAT));*/
         model.addAttribute("catRm", batchRm);
       //  model.addAttribute("dept_list", departmentService.getAll());
         return "batch/edit";
+
+
     }
 
     @PostMapping("/batch/edit")
-    public String edit(Model model, @ModelAttribute(name = "batchRm") BatchRm batchRm, Authentication authentication) {
+    public String edit(Model model, @ModelAttribute(name = "batchRm") Batch batchRm) {
         //tagService.edit(cat);
         LocalDateTime update_date = LocalDateTime.now();
         org.springframework.security.core.userdetails.User authenticateduser  = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -117,12 +119,12 @@ public class BatchController {
        // var deptId = departmentService.getById(batchRm.getDeptId());
        // System.out.println(deptId);
         //CategoryDto catDto = new CategoryDto();
-        Batch batchEntity = new Batch();
-        var batchDto = batchService.getById(batchRm.getId());
+       // Batch batchEntity = new Batch();
+        //var batchDto = batchService.getById(batchRm.getId());
       /*  batchDto.setOpeningDate(Util.getFormattedDate(batchRm.getOpeningDate(), Util.DOB_DATE_FORMAT));
         batchDto.setClosingDate(Util.getFormattedDate(batchRm.getClosingDate(), Util.DOB_DATE_FORMAT));
         batchDto.setFinalClosingDate(Util.getFormattedDate(batchRm.getFinalClosingDate(), Util.DOB_DATE_FORMAT));*/
-        batchDto.setBatchName(batchRm.getBatchName());
+        /*batchDto.setBatchName(batchRm.getBatchName());
         //batchDto.setDept(deptId);
         BeanUtils.copyProperties(batchDto,batchEntity);
 
@@ -130,14 +132,15 @@ public class BatchController {
         batchEntity.setEntryDate(batchDto.getEntryDate());
         batchEntity.setUpdateDate(update_date);
         batchEntity.setIsDelete(true);
-        batchEntity.setUpdateBy(user);;
-        batchService.edit(batchEntity);
+        batchEntity.setUpdateBy(user);;*/
+        batchService.edit(batchRm);
         model.addAttribute("message", "Batch Edited Successfully");
         return "redirect:/batch/show-all";
+
     }
 
-    @GetMapping("/batch/deactive")
-    public String soft_delete_GET(Model model, @RequestParam("id") long id) {
+    @GetMapping("/batch/delete")
+    public String soft_delete_GET(Model model, @RequestParam("id") Long id) {
         batchService.getDelete(id);
         model.addAttribute("message", "Batch Deactive successfully");
         return "redirect:/batch/show-all";
