@@ -45,8 +45,18 @@
                         <td>${ batch.id }</td>
                         <td>${ batch.batchName }</td>
                         <td>${ batch.academicYear }</td>
-                        <td><a href="edit?id=${ batch.id }">Edit</a></td>
-                        <td><a href="delete?id=${ batch.id }">Delete</a></td>
+                       <%-- <td><a href="edit?id=${ batch.id }">Edit</a></td>
+                        <td><a href="delete?id=${ batch.id }">Delete</a></td>--%>
+
+
+                        < <sec:authorize access="hasAnyRole('ADMIN')">
+                        <td><a class="btn btn-warning" href="${pageContext.request.contextPath}/batch/edit?id=${terms.id}">Edit</a></td>
+                    </sec:authorize>
+
+                        < <sec:authorize access="hasAnyRole('ADMIN')">
+                        <td><a class="btn btn-danger" href="${pageContext.request.contextPath}/batch/delete?id=${terms.id}">Delete</a></td>
+                    </sec:authorize>
+
                     </tr>
                 </c:forEach>
 
