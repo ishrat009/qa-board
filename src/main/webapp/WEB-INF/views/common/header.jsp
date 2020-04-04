@@ -90,8 +90,8 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">    
-            <a class="collapse-item" href="#">Add Department</a>
-            <a class="collapse-item" href="#">Show All</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath }/department/add">Add Department</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath }/department/add">Show All</a>
           
           </div>
         </div>
