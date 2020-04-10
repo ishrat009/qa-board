@@ -28,22 +28,19 @@
 			<div class="text-center">
 				<h5>Add New Category</h5>
 
-				<form:form class="user form-horizontal" modelAttribute="batch" action="${pageContext.request.contextPath }/batch/edit" method="POST">
+				<form:form class="user form-horizontal" modelAttribute="batchedit" action="${pageContext.request.contextPath }/batch/edit" method="POST">
 					<div class="form-group row">
 						<label align="left" class="col-sm-3">Enter Batch Name</label>
-						<div class="col-sm-9"><form:input path="id" value="${batch.id}" hidden="hidden"/>
+						<div class="col-sm-9"><form:input path="id" value="${batch.id}" hidden="show"/>
 							<form:input type="text" path="batchName" class="form-control form-control-user"
 										placeholder="Batch Name"  ></form:input>
 						</div>
 					</div>
 					<div class="form-group row">
-						<label align="left" class="col-sm-3" for="inputName" >
-							Enter Academic Year</label>
-						<div class="col-sm-9">
-							<input type="text" name="" value=""
-								   hidden="hidden"> <input type="text" name="academicYear"
-														   class="form-control form-control-user"  id="inputName"
-														   placeholder="Academic Year" required>
+						<label align="left" class="col-sm-3">Enter Academic Year</label>
+						<div class="col-sm-9"><form:input path="id" value="${batch.id}" hidden="show"/>
+							<form:input type="text" path="academicYear" class="form-control form-control-user"
+										placeholder="Batch Name"  ></form:input>
 						</div>
 					</div>
 
