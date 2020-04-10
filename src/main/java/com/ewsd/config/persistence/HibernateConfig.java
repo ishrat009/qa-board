@@ -16,7 +16,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.reflections.Reflections;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -25,6 +27,10 @@ import org.springframework.transaction.PlatformTransactionManager;
 @EnableJpaRepositories("com.ewsd.repositories")
 @org.springframework.context.annotation.Configuration
 public class HibernateConfig {
+	
+	@Autowired
+	private Environment environment;
+	
 	private SessionFactory sessionFactory = null;
 
     private Session session;
@@ -60,7 +66,8 @@ public class HibernateConfig {
             try {
                 Configuration configuration = new Configuration();
                 // Hibernate settings equivalent to hibernate.cfg.xml's properties
-                Properties settings = getBuiltProperties("hibernate.properties");
+               // Properties settings = getBuiltProperties("hibernate.properties");
+                Properties settings = getBuiltProperties("hibernate_"+environment.getActiveProfiles()[0]+".properties");
 
                 configuration.setProperties(settings);
                 configuration.addPackage("com.ewsd.model");
