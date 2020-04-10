@@ -91,12 +91,13 @@ public class BatchController {
         com.ewsd.model.User user = userService.getUserByName(authenticateduser.getUsername());
         model.addAttribute("user", user);
         model.addAttribute("username", userName);
-
-        var batchDto = batchService.getById(id);
-        var batchRm = new Batch();
+        Optional<Batch> batchOptional=batchService.getById(id);
+        var batchDto = batchOptional.get();
+      //  var batchRm = new Batch();
+        Batch batchRm=new Batch();
         BeanUtils.copyProperties(batchDto, batchRm);
-        batchRm.setBatchName(batchDto.get().getBatchName());
-        batchRm.setAcademicYear(batchDto.get().getAcademicYear());
+        //batchRm.setBatchName(batchDto.get());
+     //   batchRm.setAcademicYear(batchDto.get().getAcademicYear());
        // batchRm.setDeptId(catDto.getDept().getId());
        // catRm.setDeptName(catDto.getDept().getDeptName());
        // batchRm.setBatchName(batchDto);
