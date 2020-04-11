@@ -1,0 +1,13 @@
+// Folders
+/.settings/*
+bin/
+/target/
+
+// Project files
+.idea
+
+// Files
+*.classpath
+*.project
+
+
