@@ -12,7 +12,7 @@ public class CommentDto implements Serializable {
 
 
     private LocalDateTime commentAt;
-
+//todo: test
     public CommentDto() {
 
     }
