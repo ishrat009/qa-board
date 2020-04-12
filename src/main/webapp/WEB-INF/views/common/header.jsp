@@ -90,8 +90,8 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">    
-            <a class="collapse-item" href="#">Add Department</a>
-            <a class="collapse-item" href="#">Show All</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath }/department/add">Add Department</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath }/department/add">Show All</a>
           
           </div>
         </div>
@@ -187,7 +187,7 @@
               <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
                 <form class="form-inline mr-auto w-100 navbar-search">
                   <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                     <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"> 
                     <div class="input-group-append">
                       <button class="btn btn-primary" type="button">
                         <i class="fas fa-search fa-sm"></i>
@@ -199,7 +199,31 @@
             </li>
 
             <!-- Nav Item - Alerts -->
+              <li class="nav-item dropdown no-arrow mx-1">
+           
+              <a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath }/logout">
+                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                 Logout</a>
+          
+            </li>
+               <li class="nav-item dropdown no-arrow mx-1">
+           
+              <a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath }/profile">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Profile
+                </a>
+          
+            </li>
+               <li class="nav-item dropdown no-arrow mx-1">
+           
+               <a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath }/update-password">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Settings
+                </a>
+          
+            </li>
             <li class="nav-item dropdown no-arrow mx-1">
+            
               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->

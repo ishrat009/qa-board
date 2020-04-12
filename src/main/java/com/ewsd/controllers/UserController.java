@@ -7,10 +7,12 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.StringTokenizer;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ewsd.model.User;
+import com.ewsd.repositories.UserRepository;
 import com.ewsd.service.UserService;
 import com.ewsd.util.Constants;
 
@@ -27,6 +30,11 @@ import com.ewsd.util.Constants;
 public class UserController {
 	@Autowired
 	UserService userService;
+	private final PasswordEncoder passwordEncoder;
+
+	public UserController(PasswordEncoder passwordEncoder) {
+	this.passwordEncoder = passwordEncoder;
+	}
 
 	@GetMapping("/profile")
 	public String edit_user(Model model, Authentication auth) {
@@ -100,5 +108,41 @@ public class UserController {
 			throw new RuntimeException(e.getMessage());
 		}
 
+	}
+	
+	@GetMapping("/update-password")
+	public String updatePassword_GET(Model model,Authentication auth) {
+		var user_name = auth.getName();
+		com.ewsd.model.User user = userService.getUserByName(user_name);
+		long currentMinutes = TimeUnit.MILLISECONDS.toMinutes(System.currentTimeMillis());
+		/*
+		 * long minutesWhenRequested = TimeUnit.MILLISECONDS.toMinutes(timestamp);
+		 * System.out.println(currentMinutes - minutesWhenRequested); if (currentMinutes
+		 * - minutesWhenRequested > 2) { model.addAttribute("ok", "false"); return
+		 * "/auth/reset_password"; }
+		 */
+//	model.addAttribute("id", username);
+		model.addAttribute("user", user);
+		model.addAttribute("username", user_name);
+		model.addAttribute("ok", "");
+		return "/profile/update_password";
+	}
+
+	@PostMapping("/update-password")
+	public String updatePassword_POST(Model model,Authentication auth, @RequestParam("id") String username,
+			@RequestParam("password") String password, @RequestParam("re_password") String rePassword) {
+		var user_name = auth.getName();
+		com.ewsd.model.User userEntity = userService.getUserByName(user_name);
+	//	User userEntity = userService.getUserByName(username);
+		if (password.equals(rePassword)) {
+			userEntity.setPassword(passwordEncoder.encode(password));
+			System.out.println(password);
+			userService.edit(userEntity);
+			model.addAttribute("ok", "true");
+		} else {
+			model.addAttribute("ok", "false");
+		}
+
+		return "/profile/update_password";
 	}
 }

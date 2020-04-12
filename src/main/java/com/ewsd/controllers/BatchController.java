@@ -15,12 +15,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Controller
 public class BatchController {
@@ -85,25 +84,27 @@ public class BatchController {
     @GetMapping("/batch/edit")
     public String edit_GET(Model model, @RequestParam("id") Long id, Authentication authentication) {
         //	Category cat = tagService.getById(id);
+        Optional<Batch> batch=batchService.getById(id);
         var userName = authentication.getName();
         org.springframework.security.core.userdetails.User authenticateduser = (org.springframework.security.core.userdetails.User) SecurityContextHolder
                 .getContext().getAuthentication().getPrincipal();
         com.ewsd.model.User user = userService.getUserByName(authenticateduser.getUsername());
         model.addAttribute("user", user);
         model.addAttribute("username", userName);
-
-        var batchDto = batchService.getById(id);
-        var batchRm = new Batch();
+        Optional<Batch> batchOptional=batchService.getById(id);
+        var batchDto = batchOptional.get();
+      //  var batchRm = new Batch();
+        Batch batchRm=new Batch();
         BeanUtils.copyProperties(batchDto, batchRm);
-        batchRm.setBatchName(batchDto.get().getBatchName());
-        batchRm.setAcademicYear(batchDto.get().getAcademicYear());
+        //batchRm.setBatchName(batchDto.get());
+     //   batchRm.setAcademicYear(batchDto.get().getAcademicYear());
        // batchRm.setDeptId(catDto.getDept().getId());
        // catRm.setDeptName(catDto.getDept().getDeptName());
        // batchRm.setBatchName(batchDto);
       /*  batchRm.setOpeningDate(Util.getStringDate(batchDto.getOpeningDate(), Util.DOB_DATE_FORMAT));
         batchRm.setClosingDate(Util.getStringDate(batchDto.getClosingDate(), Util.DOB_DATE_FORMAT));
         batchRm.setFinalClosingDate(Util.getStringDate(batchDto.getFinalClosingDate(), Util.DOB_DATE_FORMAT));*/
-        model.addAttribute("batch", batchRm);
+        model.addAttribute("batchedit", batchRm);
       //  model.addAttribute("dept_list", departmentService.getAll());
         return "batch/edit";
 
@@ -140,6 +141,12 @@ public class BatchController {
         return "redirect:/batch/show-all";
 
     }
+    /*@RequestMapping("batch/edittwo")
+    public ModelAndView editBatchForm(@RequestParam Long id){
+        ModelAndView modelAndView=new ModelAndView("batch/edit")
+                Batch batchedit=batchService.getById(id);
+        modelAndView.addAllObjects("batchedit",batchedit)
+    }*/
 
     @GetMapping("/batch/delete")
     public String soft_delete_GET(Model model, @RequestParam("id") Long id) {
