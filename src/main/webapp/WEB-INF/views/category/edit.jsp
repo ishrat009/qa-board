@@ -27,7 +27,7 @@
 
 			<!-- /.card-header -->
 			<div class="text-center">
-				<h5>Add New Category</h5>
+				<h5>Edit Category</h5>
 
 				<form:form class="user form-horizontal" modelAttribute="catRm" action="${pageContext.request.contextPath }/category/edit" method="POST">
 					<div class="form-group row">
@@ -76,7 +76,7 @@
 					</div>
 
 					<div class="card-footer">
-					<input type="submit" class="btn btn-primary" name="submit" value="Create">
+					<input type="submit" class="btn btn-primary" name="submit" value="update">
 					
 					</div>
 				</form:form>

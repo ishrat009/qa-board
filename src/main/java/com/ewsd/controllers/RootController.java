@@ -131,6 +131,77 @@ public class RootController {
 		return "redirect:/login";
 	//	return "auth/login2";
 	}
+	
+	@GetMapping("/resetPassword")
+	public String resetPassword_GET(Model model) {
+		User user = new User();
+		model.addAttribute("ok", "");
+		model.addAttribute("user", user);
+		return "/auth/reset_password";
+	}
+	
+	@PostMapping("/resetPassword")
+	public String resetPassword(Model model, @RequestParam("email") String email) {
+		if (userService.existsWithEmail(email)) {
+			userService.sendPasswordResetLink(email);
+			model.addAttribute("ok", "true");
+		} else {
+			model.addAttribute("ok", "invalid-email");
+		}
+		return "/auth/reset_password";
+	}
+	
+/*
+ * 	@RequestMapping(value = "/reset-password", method = RequestMethod.GET)
+	public String resetPassword_GET(Model model) {
+		model.addAttribute("ok", "");
+		return "/templates/reset_password";
+	}
 
+	@RequestMapping(value = "/reset-password", method = RequestMethod.POST)
+	public String resetPassword_POST(Model model, @RequestParam("email") String email) {
+		if (userService.existsWithEmail(email)) {
+			userService.sendPasswordResetLink(email);
+			model.addAttribute("ok", "true");
+		} else {
+			model.addAttribute("ok", "invalid-email");
+		}
+		return "/templates/reset_password";
+	}
+
+	@RequestMapping(value = "/update-password", method = RequestMethod.GET)
+	public String updatePassword_GET(Model model, @RequestParam("id") String username,
+			@RequestParam("adp") Long timestamp) {
+		long currentMinutes = TimeUnit.MILLISECONDS.toMinutes(System.currentTimeMillis());
+		long minutesWhenRequested = TimeUnit.MILLISECONDS.toMinutes(timestamp);
+		System.out.println(currentMinutes - minutesWhenRequested);
+		if (currentMinutes - minutesWhenRequested > 2) {
+			model.addAttribute("ok", "false");
+			return "/templates/reset_password";
+		}
+		model.addAttribute("id", username);
+		model.addAttribute("ok", "");
+		return "/templates/update_password";
+	}
+
+	@RequestMapping(value = "/update-password", method = RequestMethod.POST)
+	public String updatePassword_POST(Model model, @RequestParam("id") String username,
+			@RequestParam("password") String password, @RequestParam("re_password") String rePassword) {
+		UserEntity userEntity = userService.getUserByUsername(username);
+		if (password.equals(rePassword)) {
+			userEntity.setPassword(encoder.encode(password));
+			System.out.println(password);
+			userService.updateUser(userEntity);
+			model.addAttribute("ok", "true");
+		} else {
+			model.addAttribute("ok", "false");
+		}
+
+		return "/templates/update_password";
+	}
+
+ * 
+ * 
+ */
 	
 }

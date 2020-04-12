@@ -10,7 +10,7 @@
 <section class="content">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-5">
 
 				<!-- Profile Image -->
 				<div class="card card-primary card-outline">
@@ -42,7 +42,7 @@
 				<!-- /.card -->
 			</div>
 			<!-- /.col -->
-			<div class="col-md-8">
+			<div class="col-md-7">
 				<div class="p-5 card card-primary card-outline">
 						
 					<!-- /.card-header -->
@@ -85,12 +85,12 @@
 									</div>
 									<div class="form-group row">
 										<label align="left"  class="col-sm-3">Profile
-											Picture: </label>
+											Picture </label>
 										<div class="col-sm-9">
 											<input type="file" name="file" />
 										</div>
 									</div>
-									<div class="card-footer">
+									<div class="">
 										<input type="submit" class="btn btn-primary" name="submit"
 											value="Update">
 									</div>

@@ -43,6 +43,21 @@ public class Batch implements Serializable {
 	@Column(name = "u_date")
 	private LocalDateTime updateDate;
 
+	public Batch() {
+	}
+
+
+	public Batch(Long id,String batchName, String academicYear, Boolean isDelete, User entryBy, LocalDateTime entryDate, User updateBy, LocalDateTime updateDate) {
+		this.id=id;
+		this.batchName = batchName;
+		this.academicYear = academicYear;
+		this.isDelete = isDelete;
+		this.entryBy = entryBy;
+		this.entryDate = entryDate;
+		this.updateBy = updateBy;
+		this.updateDate = updateDate;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -108,6 +123,17 @@ public class Batch implements Serializable {
 	}
 
 
-	
-	
+	@Override
+	public String toString() {
+		return "Batch{" +
+				"id=" + id +
+				", batchName='" + batchName + '\'' +
+				", academicYear='" + academicYear + '\'' +
+				", isDelete=" + isDelete +
+				", entryBy=" + entryBy +
+				", entryDate=" + entryDate +
+				", updateBy=" + updateBy +
+				", updateDate=" + updateDate +
+				'}';
+	}
 }

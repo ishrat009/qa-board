@@ -15,6 +15,7 @@ public class AppInitializer implements WebApplicationInitializer {
 	        // Load Spring web application configuration
 	        AnnotationConfigWebApplicationContext ac = new AnnotationConfigWebApplicationContext();
 	        ac.register(RootConfig.class);
+			ac.getEnvironment().addActiveProfile("dev");
 	        ac.refresh();
 	        
 	        servletCxt.addListener(new ContextLoaderListener(ac));
@@ -27,6 +28,7 @@ public class AppInitializer implements WebApplicationInitializer {
 	       ServletRegistration.Dynamic registration = servletCxt.addServlet("servlet", new DispatcherServlet(sc));
 	        registration.setLoadOnStartup(1);
 	        registration.addMapping("/");
+	
 	    }
 	
 }
