@@ -63,7 +63,7 @@
                   </form>
                   <hr>
                   <div class="text-center">
-                    <a class="small" href="${pageContext.request.contextPath }/register">Forgot Password?</a>
+                    <a class="small" href="${pageContext.request.contextPath }/resetPassword">Forgot Password?</a>
                   </div>
                   <div class="text-center">
                     <a class="small" href="${pageContext.request.contextPath }/register" >Create an Account!</a>

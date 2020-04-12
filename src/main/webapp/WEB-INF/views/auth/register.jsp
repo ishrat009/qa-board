@@ -69,7 +69,7 @@
 							</form>
 							<hr>
 							<div class="text-center">
-								<a class="small" href="forgot-password.html">Forgot
+								<a class="small" href="${pageContext.request.contextPath }/resetPassword">Forgot
 									Password?</a>
 							</div>
 							<div class="text-center">

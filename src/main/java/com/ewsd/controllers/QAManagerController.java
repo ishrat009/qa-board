@@ -138,10 +138,10 @@ public class QAManagerController {
 		return "redirect:/category/show-all";
 	}
 
-	@GetMapping("/category/deactive")
+	@GetMapping("/category/delete")
 	public String soft_delete_GET(Model model, @RequestParam("id") long id) {
-		// tagService.deactive(id);
-		model.addAttribute("message", "Category Deactive successfully");
+		tagService.delete(tagService.findById(id));
+		model.addAttribute("message", "Category Deleted successfully");
 		return "redirect:/category/show-all";
 	}
 }
