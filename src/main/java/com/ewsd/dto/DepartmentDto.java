@@ -17,7 +17,19 @@ public class DepartmentDto implements Serializable {
 
 	private User entryBy;
 
+	public DepartmentDto() {
+		super();
+	}
 
+	public DepartmentDto(Long id, String deptName, Batch batch, Boolean isDelete, User entryBy) {
+		super();
+		this.id = id;
+		this.deptName = deptName;
+		this.batch = batch;
+		this.isDelete = isDelete;
+		this.entryBy = entryBy;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -64,6 +76,4 @@ public class DepartmentDto implements Serializable {
 				+ ", entryBy=" + entryBy + "]";
 	}
 
-	
-	
 } // end of Class

@@ -8,8 +8,8 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
 	<a href="${pageContext.request.contextPath }/department/list"
-		class="d-none d-sm-inline-block btn btn-sm btn-success shadow-md"><i
-		class="fa-sm text-white-50"></i>Show All Department</a>
+		class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+		class="fa-sm text-white-50"></i>Show All Departments</a>
 </div>
 
 <!-- Content Row -->
@@ -19,24 +19,21 @@
 
 			<!-- /.card-header -->
 			<div class="text-center">
-				<h5>Add New Department</h5>
+				<h5>Edit Department</h5>
 
-				<form:form class="user form-horizontal" modelAttribute="department"
-					action="${pageContext.request.contextPath }/department/add"
-					method="POST">
+				<form:form class="user form-horizontal" modelAttribute="dept" action="${pageContext.request.contextPath }/department/edit" method="POST">
 					<div class="form-group row">
 						<label align="left" class="col-sm-3">Enter Department Name</label>
 						<div class="col-sm-9">
-							<form:input type="text" path="deptName"
-								class="form-control form-control-user"
-								placeholder="The Name of the new department"></form:input>
+							<form:input path="id" value="${dept.id}" hidden="hidden"/>
+							
+							<form:input type="text" path="name" class="form-control form-control-user"
+								 placeholder="Category Name" value="${dept.deptName}"></form:input>
 						</div>
 					</div>
 
-
 					<div class="card-footer">
-						<input type="submit" class="btn btn-primary" name="submit"
-							value="Create">
+						<input type="submit" class="btn btn-primary" name="submit" value="Create">
 					</div>
 				</form:form>
 			</div>
@@ -49,6 +46,3 @@
 
 <!-- GLOBAL FOOTER -->
 <jsp:include page="../common/footer.jsp" />
-
-
-

@@ -9,6 +9,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ewsd.model.Category;
 import com.ewsd.model.Department;
 import com.ewsd.repositories.DepartmentRepository;
 
@@ -27,8 +28,21 @@ public class DepartmentService {
 		this.hibernateConfig = hibernateConfig;
 	}
 	
-	public void add(Department dept) {
-		departmentRepository.save(dept);
+	public boolean add(Department deptEntity) {
+		if(!exists(deptEntity.getDeptName())) {
+			departmentRepository.save(deptEntity);
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	private boolean exists(String deptName) {
+		if(findByDeptName(deptName)!=null) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	public List<Department> getAll(){
@@ -38,29 +52,18 @@ public class DepartmentService {
 	public Department findByDeptName(String deptName) {
 		return departmentRepository.findByDeptName(deptName);
 	}
+	
 	 public Optional<Department> findById(Long id) { 
 		  return departmentRepository.findById(id); 
 	 }
+	 
 	public Department findBy_Id(Long Id) {
 		return departmentRepository.getOne(Id);
 	}
-
-	public String edit(Department dept) {
-		// TODO Auto-generated method stub
-		Department department = findByDeptName(dept.getDeptName());
-		if(department == null) {
-			department = findBy_Id(dept.getId());
-			if(department == null) {
-				departmentRepository.save(dept);
-				return "saved";
-			}else {
-				department.setDeptName(dept.getDeptName());
-				departmentRepository.save(department);
-				return "updated";
-			}
-		}else{
-			return "updated";
-		}
+	
+	public boolean delete(Department deptEntity) {
+		departmentRepository.delete(deptEntity);
+		return true;
 	}
 	
 	public Department getById(long deptId) {
@@ -69,19 +72,24 @@ public class DepartmentService {
 		if (!transaction.isActive()) {
 			transaction = session.beginTransaction();
 		}
-		CriteriaBuilder cb = session.getCriteriaBuilder();
-		CriteriaQuery<Department> sc = cb.createQuery(Department.class);
-		Root<Department> root = sc.from(Department.class);
-		sc.select(root);
-		sc.where(
-				cb.and(
-						cb.equal(root.get("id"), deptId),
-						cb.isTrue(root.get("isDelete"))
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<Department> criteriaQuery = criteriaBuilder.createQuery(Department.class);
+		Root<Department> root = criteriaQuery.from(Department.class);
+		criteriaQuery.select(root);
+		criteriaQuery.where(
+				criteriaBuilder.and(
+						criteriaBuilder.equal(root.get("id"), deptId),
+						criteriaBuilder.isTrue(root.get("isDelete"))
 				)
 		);
-		var query = session.getEntityManagerFactory().createEntityManager().createQuery(sc);
+		var query = session.getEntityManagerFactory().createEntityManager().createQuery(criteriaQuery);
 		var dept_list = query.getResultList();
+		
 		return Optional.ofNullable(dept_list.get(0))
-				.orElseThrow(() -> new ResourceNotFoundException("Dept Not Found With This Id"));
+				.orElseThrow(() -> new ResourceNotFoundException("No department was found with this ID!"));
 	}
-}
+	
+	  public void edit(Department dept) {
+		  departmentRepository.save(dept);
+	    }
+} // End of Class
