@@ -53,17 +53,8 @@ public class DepartmentService {
 		return departmentRepository.findByDeptName(deptName);
 	}
 	
-	 public Optional<Department> findById(Long id) { 
-		  return departmentRepository.findById(id); 
-	 }
-	 
-	public Department findBy_Id(Long Id) {
+	public Department findById(Long Id) {
 		return departmentRepository.getOne(Id);
-	}
-	
-	public boolean delete(Department deptEntity) {
-		departmentRepository.delete(deptEntity);
-		return true;
 	}
 	
 	public Department getById(long deptId) {
@@ -79,7 +70,7 @@ public class DepartmentService {
 		criteriaQuery.where(
 				criteriaBuilder.and(
 						criteriaBuilder.equal(root.get("id"), deptId),
-						criteriaBuilder.isTrue(root.get("isDelete"))
+						criteriaBuilder.isFalse(root.get("isDelete"))
 				)
 		);
 		var query = session.getEntityManagerFactory().createEntityManager().createQuery(criteriaQuery);
@@ -89,7 +80,12 @@ public class DepartmentService {
 				.orElseThrow(() -> new ResourceNotFoundException("No department was found with this ID!"));
 	}
 	
-	  public void edit(Department dept) {
-		  departmentRepository.save(dept);
-	    }
+	public void edit(Department dept) {
+		departmentRepository.save(dept);
+	}
+
+	public boolean delete(Department dept) {
+		departmentRepository.delete(dept);
+		return true;
+	}
 } // End of Class

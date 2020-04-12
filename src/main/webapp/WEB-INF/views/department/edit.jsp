@@ -8,7 +8,7 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
 	<a href="${pageContext.request.contextPath }/department/list"
-		class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+		class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i
 		class="fa-sm text-white-50"></i>Show All Departments</a>
 </div>
 
@@ -27,13 +27,13 @@
 						<div class="col-sm-9">
 							<form:input path="id" value="${dept.id}" hidden="hidden"/>
 							
-							<form:input type="text" path="name" class="form-control form-control-user"
+							<form:input type="text" path="deptName" class="form-control form-control-user"
 								 placeholder="Category Name" value="${dept.deptName}"></form:input>
 						</div>
 					</div>
 
 					<div class="card-footer">
-						<input type="submit" class="btn btn-primary" name="submit" value="Create">
+						<input type="submit" class="btn btn-primary" name="submit" value="Update">
 					</div>
 				</form:form>
 			</div>

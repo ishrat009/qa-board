@@ -63,7 +63,7 @@ public class DepartmentController {
 		departmentService.edit(dept);
 
 		model.addAttribute("message", "A new Department has been added Successfully");
-		return "redirect:/department/add";
+		return "redirect:/department/list";
 	}
 
 	@GetMapping("/department/list")
@@ -77,7 +77,7 @@ public class DepartmentController {
 		model.addAttribute("username", userName);
 		model.addAttribute("departments", departmentService.getAll());
 		
-		model.addAttribute("message", "Showing All Departments");
+		model.addAttribute("message", "");
 		return "department/list";
 	}
 
@@ -91,45 +91,46 @@ public class DepartmentController {
 		model.addAttribute("username", userName);
 
 		var deptSer = departmentService.getById(id);
-//		var dept = new Department();
-//		
-//		BeanUtils.copyProperties(deptSer, dept);
-//		dept.setId(deptSer.getId());
-//		dept.setDeptName(deptSer.getDeptName());
+		var dept = new Department();
 		
-		model.addAttribute("deptSer", deptSer);
+		BeanUtils.copyProperties(deptSer, dept);
+		dept.setId(deptSer.getId());
+		dept.setDeptName(deptSer.getDeptName());
+		
+		model.addAttribute("dept", dept);
 		return "department/edit";
 	}
 
 	@PostMapping("/department/edit")
-	public String edit(Model model, @ModelAttribute("dept") Department dept, Authentication authentication) {
-		LocalDateTime update_date = LocalDateTime.now();
+	public String edit(Model model, @ModelAttribute("dept") Department deptEntity, Authentication authentication) {		
 		 org.springframework.security.core.userdetails.User authenticateduser  = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 com.ewsd.model.User user = userService.getUserByName(authenticateduser.getUsername());
 		 
-//		long deptId = departmentService.getById(deptId);
+		LocalDateTime update_date = LocalDateTime.now();
 
-		Department deptEntity = new Department();
-		var catDto = departmentService.getById(dept.getId());
-		catDto.setDeptName(dept.getDeptName());
-//		catDto.setId(deptId);
-		BeanUtils.copyProperties(catDto,deptEntity);
+		Department dept = new Department();
+		var deptSer = departmentService.getById(deptEntity.getId());
 		
-		deptEntity.setEntryBy(catDto.getEntryBy());
-		deptEntity.setEntryDate(catDto.getEntryDate());
-		deptEntity.setUpdateDate(update_date);
-		deptEntity.setIsDelete(true);
-		deptEntity.setUpdateBy(user);;
-		departmentService.edit(deptEntity);
-		model.addAttribute("message", "Category Edited Successfully");
-		return "redirect:/department/show-all";
+		deptSer.setDeptName(deptEntity.getDeptName());
+		BeanUtils.copyProperties(deptSer,dept);
+		
+		dept.setEntryBy(deptSer.getEntryBy());
+		dept.setEntryDate(deptSer.getEntryDate());
+		dept.setUpdateDate(update_date);
+		dept.setIsDelete(false);
+		dept.setUpdateBy(user);;
+		departmentService.edit(dept);
+		
+		model.addAttribute("message", "The department has been updated Successfully!");
+		return "redirect:/department/list";
 	}
 
-	@GetMapping("/department/deactive")
-	public String soft_delete_GET(Model model, @RequestParam("id") long id) {
-		// tagService.deactive(id);
-		model.addAttribute("message", "Category Deactive successfully");
-		return "redirect:/department/show-all";
+	@GetMapping("/department/delete")
+	public String delete_dept(Model model, @RequestParam("id") long id) {
+		departmentService.delete(departmentService.findById(id));
+		
+		model.addAttribute("message", "The department has been deactived successfully!");
+		return "redirect:/department/list";
 	}
 	
 } // end of class

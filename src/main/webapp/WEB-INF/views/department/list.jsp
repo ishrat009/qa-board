@@ -13,6 +13,15 @@
 		class="fa-sm text-white-50"></i>Add New Department</a>
 </div>
 <!-- DataTales Example -->
+
+<c:if test="${!empty(message)}">
+	<div class="card mb-4 py-3 border-bottom-success">
+	      <div class="card-body">
+	        ${message}
+	      </div>
+	</div>
+</c:if>
+
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
 		<h6 class="m-0 font-weight-bold text-primary">List of Departments</h6>
