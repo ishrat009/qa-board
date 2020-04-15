@@ -3,6 +3,7 @@
          pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 <jsp:include page="../common/header.jsp" />
 
 <style>
@@ -30,8 +31,10 @@
             </div>
         </div>
     </div>
+</div>
 
-    <div>
+    <div class="row">
+
         <form:form class="form-horizontal" action="${pageContext.request.contextPath }/termsAndCon/add"
                    modelAttribute="term">
 
@@ -39,26 +42,31 @@
 
                 <div class="form-group row">
                     <div class="col-sm-10" >
-                        <form:input class="form-control"   path="name"/>
+                        <form:input class="form-control text-center"   path="name" placeholder=" enter title" />
 
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-10" >
-                        <form:input class="form-control" id="userInput"  path="textMessage"/>
-
+                        <div id="userInput">
+                            <form:textarea name="editor1" id="editor1" rows="10" cols="180" path="textMessage"/>
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer">
                     <input type="submit" class="btn btn-primary" name="submit" value="Add">
                 </div>
+
+                <script>
+                    CKEDITOR.replace( 'editor1' );
+                </script>
             </div>
 
 
         </form:form>
     </div>
     <!-- /.tab-pane -->
-</div>
+
 <!-- /.tab-content -->
 
 <jsp:include page="../common/footer.jsp" />

@@ -6,6 +6,7 @@
 <jsp:include page="../common/header.jsp" />
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 
 <style>
     #userInput {
@@ -55,9 +56,13 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-9">
-                            <form:input type="text" id="userInput" path="textMessage"
-                                        class="form-control "></form:input>
+                        <div class="col-sm-10" >
+                            <div id="userInput">
+
+                                <form:textarea name="editor1" id="editor1" rows="10" cols="180" path="textMessage"/>
+                            </div>
+
+
                         </div>
                     </div>
 
@@ -66,6 +71,12 @@
                     <div class="card-footer">
                         <input type="submit" class="btn btn-primary" name="submit" value="Update">
 
+                    </div>
+                    <div>
+
+                        <script>
+                            CKEDITOR.replace( 'editor1' );
+                        </script>
                     </div>
                 </form:form>
             </div>
