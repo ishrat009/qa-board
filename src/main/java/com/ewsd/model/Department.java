@@ -17,6 +17,7 @@ import javax.persistence.Table;
 public class Department  implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	
 	@Column(name = "id", nullable = false)
 	private Long id;
 	
@@ -32,6 +33,17 @@ public class Department  implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "e_by")
 	private User entryBy;
+	
+	@Column(name = "e_date")
+	private LocalDateTime entryDate;
+	
+	@ManyToOne
+	@JoinColumn(name = "u_by")
+	private User updateBy;
+	
+	@Column(name = "u_date")
+	private LocalDateTime updateDate;
+
 	
 	public Department() {
 		super();
@@ -120,18 +132,5 @@ public class Department  implements Serializable{
 	public void setUpdateDate(LocalDateTime updateDate) {
 		this.updateDate = updateDate;
 	}
-
-	@Column(name = "e_date")
-	private LocalDateTime entryDate;
 	
-	@ManyToOne
-	@JoinColumn(name = "u_by")
-	private User updateBy;
-	
-	@Column(name = "u_date")
-	private LocalDateTime updateDate;
-
-
-
-	
-}
+} // End of Class
