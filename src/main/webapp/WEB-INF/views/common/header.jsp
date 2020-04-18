@@ -148,6 +148,49 @@
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
+       <!-- Heading -->
+      <div class="sidebar-heading">
+        Co Ordinator
+      </div>
+       <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>All Ideas</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Submit An Issue</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Views All Issue</span></a>
+      </li>
+		<!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Staff
+      </div>
+       <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>All Idea</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="${pageContext.request.contextPath }/idea/add">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Post An Idea</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Timeline</span></a>
+      </li>
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
 
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">

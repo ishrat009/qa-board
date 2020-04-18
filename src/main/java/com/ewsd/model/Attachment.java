@@ -1,16 +1,21 @@
 package com.ewsd.model;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_attachment")
 public class Attachment implements Serializable{
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name="id", length = 20, nullable = false)
 	private Long id;
 	
@@ -25,7 +30,7 @@ public class Attachment implements Serializable{
 	
 	@Column(name="file_type")
 	private String fileType;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -84,6 +89,7 @@ public class Attachment implements Serializable{
 		return "Attachment [id=" + id + ", fileName=" + fileName + ", fileTitle=" + fileTitle + ", fileURL=" + fileURL
 				+ ", fileType=" + fileType + "]";
 	}
+
 	
 	
 }

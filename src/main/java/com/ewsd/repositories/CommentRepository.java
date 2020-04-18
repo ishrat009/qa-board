@@ -1,16 +1,17 @@
 package com.ewsd.repositories;
+import java.util.List;
 
-import com.ewsd.model.Comment;
-import com.ewsd.model.TermsAndConditions;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import com.ewsd.model.Comment;
+import com.ewsd.model.Idea;
+import com.ewsd.model.User;
+
 
 @Repository
-@Transactional
-public interface CommentRepository extends JpaRepository<Comment, Long> {
+public interface CommentRepository extends JpaRepository<Comment, Long>{
+	//Comment findByIdeaAndCommentedUser(Idea idea, User userByUsername);
 
-    Comment getById (Long id);
+	//List<Comment> findAllByIdea(Idea idea);
 }

@@ -1,49 +1,80 @@
 package com.ewsd.dto;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class CommentDto implements Serializable {
+import com.ewsd.model.Idea;
+import com.ewsd.model.User;
 
+public class CommentDto {
+	
+	private Long id;
+	
+	private Idea ideaId;
+	
+	private User userId;
+	
+	private String commentBody;
+	
+	private LocalDateTime entryDate;
+	
+	private LocalDateTime updateDate;
+	
+	private Boolean isDelete;
 
-    private Long commentId;
+	public Long getId() {
+		return id;
+	}
 
-    private String commentBody;
+	public void setId(Long id) {
+		this.id = id;
+	}
 
+	public Idea getIdeaId() {
+		return ideaId;
+	}
 
-    private LocalDateTime commentAt;
-//todo: test
-    public CommentDto() {
+	public void setIdeaId(Idea ideaId) {
+		this.ideaId = ideaId;
+	}
 
-    }
+	public User getUserId() {
+		return userId;
+	}
 
-    public CommentDto(Long commentId, String commentBody, LocalDateTime commentAt) {
-        this.commentId = commentId;
-        this.commentBody = commentBody;
-        this.commentAt = commentAt;
-    }
+	public void setUserId(User userId) {
+		this.userId = userId;
+	}
 
-    public Long getCommentId() {
-        return commentId;
-    }
+	public String getCommentBody() {
+		return commentBody;
+	}
 
-    public void setCommentId(Long commentId) {
-        this.commentId = commentId;
-    }
+	public void setCommentBody(String commentBody) {
+		this.commentBody = commentBody;
+	}
 
-    public String getCommentBody() {
-        return commentBody;
-    }
+	public LocalDateTime getEntryDate() {
+		return entryDate;
+	}
 
-    public void setCommentBody(String commentBody) {
-        this.commentBody = commentBody;
-    }
+	public void setEntryDate(LocalDateTime entryDate) {
+		this.entryDate = entryDate;
+	}
 
-    public LocalDateTime getCommentAt() {
-        return commentAt;
-    }
+	public LocalDateTime getUpdateDate() {
+		return updateDate;
+	}
 
-    public void setCommentAt(LocalDateTime commentAt) {
-        this.commentAt = commentAt;
-    }
+	public void setUpdateDate(LocalDateTime updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public Boolean getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Boolean isDelete) {
+		this.isDelete = isDelete;
+	}
+
 }
