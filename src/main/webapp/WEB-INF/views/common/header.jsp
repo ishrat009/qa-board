@@ -90,16 +90,24 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">    
-            <a class="collapse-item" href="#">Add Department</a>
-            <a class="collapse-item" href="#">Show All</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath }/department/add">Add Department</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath }/department/add">Show All</a>
           
           </div>
         </div>
       </li>
-   <li class="nav-item">
-        <a class="nav-link" href="">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Set Terms And Conditions</span></a>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Set Terms And Conditions</span>
+        </a>
+        <div id="collapsePage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+
+            <a class="collapse-item" href="${pageContext.request.contextPath }/termsAndCon/add">Add Terms and Condition</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath }/termsAndCon/show-all">Show All</a>
+          </div>
+        </div>
       </li>
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -117,7 +125,7 @@
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-           
+
             <a class="collapse-item" href="${pageContext.request.contextPath }/category/add">Add Category</a>
             <a class="collapse-item" href="${pageContext.request.contextPath }/category/show-all">Show All</a>
           </div>
