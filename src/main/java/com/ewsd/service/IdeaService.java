@@ -34,8 +34,6 @@ public class IdeaService {
 		if (!transaction.isActive()) {
 			transaction = session.beginTransaction();
 		}
-		//Player playerEntity = new Player();
-	  //  BeanUtils.copyProperties(playerDto,playerEntity);
 		try {
 			session.save(ideaEntity);
 			transaction.commit();
@@ -48,11 +46,6 @@ public class IdeaService {
 
 	}
 
-	/*
-	 * public boolean add(Idea ideaEntity) { if(!exists(ideaEntity.getIdeaTitle()))
-	 * { ideaRepository.saveOrUpdate(ideaEntity); ideaRepository.save(ideaEntity);
-	 * return true; }else { return false; } }
-	 */
 	public boolean exists(String name) {
 		if(findByIdeaTitle(name)!=null) {
 			return true;
@@ -71,47 +64,12 @@ public class IdeaService {
 		return (List<Idea>) ideaRepository.findAll();
 	}
 	
-	/*
-	 * public List<Idea> listIdeasByTag(Category tag){ return (List<Idea>)
-	 * ideaRepository.findByCategory(tag); }
-	 */
 	
-	/*
-	 * public Page<Idea> listAllIdeasByAuthorEmail(String authorEmail, int
-	 * pageNumber, int resultPerPage){ return
-	 * ideaRepository.findAllByAuthorEmailOrderByIdeaIdDesc(authorEmail,
-	 * getPage(pageNumber, resultPerPage)); }
-	 */
-	
-	/*
-	 * public List<Idea> listAllIdeasByAuthorEmail(String authorEmail){ return
-	 * ideaRepository.findAllByAuthorEmail(authorEmail); }
-	 */
-	
-	/*
-	 * public PageRequest getPage(int pageNumber, int resultPerPage) { PageRequest
-	 * request = new PageRequest(pageNumber - 1, resultPerPage, Sort.Direction.DESC,
-	 * "ideaId"); return request; }
-	 */
 	
 	public int count(){
         return getAll().size();
     }
-	
-	/*
-	 * public int count(String authorEmail, int pageNumber, int resultPerPage) {
-	 * return listAllIdeasByAuthorEmail(authorEmail, pageNumber,
-	 * resultPerPage).getContent().size(); }
-	 * 
-	 * public int count(int pageNumber, int resultPerPage) { return
-	 * ideaRepository.findAll(getPage(pageNumber,
-	 * resultPerPage)).getContent().size(); }
-	 */
-	
-	/*
-	 * public Idea getIdea(Long ideaId) { return ideaRepository.findOne(ideaId); }
-	 */
-	
+
 	public Idea getById(long ideaId) {
 		var session = hibernateConfig.getSession();
 		var transaction = session.getTransaction();
@@ -133,13 +91,5 @@ public class IdeaService {
 		return Optional.ofNullable(idea_list.get(0))
 				.orElseThrow(() -> new ResourceNotFoundException("Idea Not Found With This Id"));
 	}
-	/*
-	 * public Page<Idea> getPageOfIdeas(int pageNumber, int resultPerPage) { // TODO
-	 * Auto-generated method stub return ideaRepository.findAll(getPage(pageNumber,
-	 * resultPerPage)); }
-	 */
-	/*
-	 * public List<Idea> ideasByTag(Category cat){ return
-	 * ideaRepository.findAllByCategory(cat); }
-	 */
+	
 }

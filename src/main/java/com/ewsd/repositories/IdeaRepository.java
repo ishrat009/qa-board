@@ -12,14 +12,7 @@ import com.ewsd.model.Idea;
 public interface IdeaRepository extends JpaRepository<Idea, Long>{
 
 	Idea findByIdeaTitle(String ideaTitle);
-	//Page<Idea> findAllByAuthorEmailOrderByIdeaIdDesc(String email, Pageable pageable);
-
-//	List<Idea> findAllByAuthorEmail(String email);
-	
 	@Query("select i from Idea i")
 	Page<Idea> findAll(Pageable page);
 
-	//List<Idea> findAllByCategory(Category cat);
-
-//	List<Idea> findByCategory(Category cat);
 }

@@ -44,12 +44,6 @@ public class StudentController {
 	@GetMapping("/idea/add")
 	public String postNewIdea_GET(Model model, Authentication authentication) {
 
-		/*
-		 * if(!notificationId.isEmpty() && Character.isDigit(notificationId.charAt(0)))
-		 * { Notification notification =
-		 * notificationService.findById(Long.parseLong(notificationId));
-		 * notification.setSeen("yes"); notificationService.save(notification); }
-		 */
 		var userName = authentication.getName();
 		org.springframework.security.core.userdetails.User authenticateduser = (org.springframework.security.core.userdetails.User) SecurityContextHolder
 				.getContext().getAuthentication().getPrincipal();
@@ -58,14 +52,6 @@ public class StudentController {
 		model.addAttribute("username", userName);
 		model.addAttribute("ideaRm", new IdeaRm());
 		model.addAttribute("cat_list", tagService.getAll());
-	//	System.out.println(tagService.getAll());
-		// List<Category> cats = tagService.getAll();
-		// cats.removeIf(cat -> cats.getClosingDate() == null ||
-		// cats.getClosingDate().getTime() < System.currentTimeMillis()
-		// || !cat.getDepartments().contains(user.getDepartment()));
-
-		// model.addAttribute("categories", cats);
-		// logger.info("Student -> Post new idea : ");
 		return "/idea/add";
 	}
 
@@ -117,7 +103,6 @@ public class StudentController {
 				}
 				Attachment attachment = new Attachment();
 				Long attachmentId = System.currentTimeMillis();
-				//attachment.setId(attachmentId);
 				attachment.setFileName("" + attachmentId);
 				attachment.setFileTitle(ideaRm.getIdeaTitle());
 				attachment = attachmentService.save(attachment, file, user.getId());
@@ -145,24 +130,10 @@ public class StudentController {
 		com.ewsd.model.User user = userService.getUserByName(authenticateduser.getUsername());
 		model.addAttribute("user", user);
 		model.addAttribute("username", userName);
-		// model.addAttribute("deptName",);
 		model.addAttribute("idea", new IdeaRm());
 		model.addAttribute("idea_list", ideaService.getAll());
 		model.addAttribute("message", "Showing All Ideas");
 		return "idea/show-all";
 	}
-	/*
-	 * 3rd : [ Attachment [ id=1587165431890, fileName=1587165431890, fileTitle=test
-	 * A, fileURL=/uploaded_img/11587165431890.png, fileType=image/png ], Attachment
-	 * [ id=1587165431806, fileName=1587165431806, fileTitle=test A,
-	 * fileURL=/uploaded_img/11587165431806.png, fileType=image/png ], Attachment [
-	 * id=1587165431902, fileName=1587165431902, fileTitle=test A,
-	 * fileURL=/uploaded_img/11587165431902.jpg, fileType=image/jpeg ] ] [Attachment
-	 * [ id=1587165431890, fileName=1587165431890, fileTitle=test A,
-	 * fileURL=/uploaded_img/11587165431890.png, fileType=image/png ], Attachment
-	 * [id=1587165431806, fileName=1587165431806, fileTitle=test A,
-	 * fileURL=/uploaded_img/11587165431806.png, fileType=image/png], Attachment
-	 * [id=1587165431902, fileName=1587165431902, fileTitle=test A,
-	 * fileURL=/uploaded_img/11587165431902.jpg, fileType=image/jpeg]]
-	 */
+	
 }

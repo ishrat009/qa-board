@@ -31,7 +31,6 @@ public class AttachmentService {
 		this.hibernateConfig = hibernateConfig;
 	}
 	// Save the uploaded file to this folder
-	//private static final String UPLOADED_FOLDER = Properties.TEMP_PATH;
 	String absoluteFilePath = Constants.UPLOADED_FOLDER;
 	private Logger logger = Logger.getLogger(AttachmentService.class.getName());
 
@@ -50,18 +49,12 @@ public class AttachmentService {
 			while (tokenizer.hasMoreTokens()) {
 				extension = tokenizer.nextToken();
 			}
-			//var millis = System.currentTimeMillis();
-			//String url = dir.getAbsolutePath() + "//" + millis + "." + extension;
 			String url = dir.getAbsolutePath() + userId + attachment.getFileName() + "." + extension;
 			File serverFile = new File(url);
 			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 			stream.write(bytes);
 			stream.close();
 			url = "/uploaded_img/" + userId + attachment.getFileName() + "." + extension;
-			
-		//	url = "/uploaded_img/" + millis + attachment.getId() + "." + extension;
-			
-		//	attachment.setProfilePic("/uploaded_img/" + millis + "." + extension);
 			attachment.setFileURL(url);
 			attachment.setFileType(Files.probeContentType(Paths.get(url)));
 			// Get the file and save it somewhere
@@ -78,25 +71,5 @@ public class AttachmentService {
 		System.out.println(attachmentRepository.findFileNameById(id));
 		return attachmentRepository.findFileNameById(id); 
 		}
-	/*
-	 * public void save(Attachment attachment) {
-	 * attachmentRepository.save(attachment); }
-	 */
-	/*
-	 * public Attachment readAttachment(Long id) { return
-	 * attachmentRepository.findOne(id); }
-	 */
 	
-	/*
-	 * public Attachment getAttachmentById(Long id) {
-	 * 
-	 * var session = hibernateConfig.getSession(); Transaction tx =
-	 * session.getTransaction(); if (!tx.isActive()) tx =
-	 * session.beginTransaction();
-	 * 
-	 * var query = session.getEntityManagerFactory().createEntityManager()
-	 * .createQuery("select c from Attachment c where id=:id ", Attachment.class);
-	 * query.setParameter("id", id); Attachment att = query.getResultList().get(0);
-	 * return att; }
-	 */
 }
