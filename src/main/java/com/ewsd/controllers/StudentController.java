@@ -77,8 +77,6 @@ public class StudentController {
 				.getContext().getAuthentication().getPrincipal();
 		com.ewsd.model.User user = userService.getUserByName(authenticateduser.getUsername());
 
-		// System.out.println(ideaRm.toString());
-
 		var catId = tagService.getById(ideaRm.getCatId());
 		System.out.println(catId);
 		IdeaDto ideaDto = new IdeaDto();
@@ -95,7 +93,6 @@ public class StudentController {
 			e.printStackTrace();
 		}
 		Set<Attachment> attachments = new HashSet<Attachment>();
-		//List<Attachment> attachments = new ArrayList<>();
 		if (files[0].getOriginalFilename().contains(".")) {
 			for (MultipartFile file : files) {
 				if (file.getSize() > 25000000L) {
@@ -129,25 +126,15 @@ public class StudentController {
 
 		}
 
-		/*
-		 * Set<Attachment> atts = new HashSet<Attachment>(); for (var att : attachments)
-		 * { System.out.println("first : " + att.getId()); var at =
-		 * attachmentService.getAttachmentById(att.getId());
-		 * System.out.println("second : " + at); atts.add(at); }
-		 */
-		//System.out.println("3rd : " + atts);
-
-		// ideaEntity.setCourses(courses);
+		ideaDto.setAttachments(attachments);
 		BeanUtils.copyProperties(ideaDto, ideaEntity);
 		ideaEntity.setEntryDate(entry_date);
 		ideaEntity.setIsDelete(true);
 		ideaEntity.setAuthorEmail(user.getEmail());
 		ideaEntity.setCountViews(0);
 		ideaEntity.setUserId(user);
-		//ideaEntity.setAttachments(attachments);
-		// System.out.println(atts);
 		ideaService.add(ideaEntity);
-		return "redirect:/idea/add";
+		return "redirect:/idea/show-all";
 	}
 
 	@GetMapping("/idea/show-all")

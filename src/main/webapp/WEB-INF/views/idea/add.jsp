@@ -50,7 +50,7 @@
 						<label align="left" class="col-sm-3">Idea Body</label>
 						<div class="col-sm-9">
 							<form:textarea type="text" id="inputIdeaBody" path="ideaBody"
-								class="form-control form-control-user" placeholder="Title"></form:textarea>
+								class="form-control" placeholder="Title"></form:textarea>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -121,5 +121,3 @@
 			$(".modal-body").load("/terms-and-conditions");
 		}
 	</script>
-
-

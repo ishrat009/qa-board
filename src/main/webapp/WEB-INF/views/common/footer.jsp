@@ -91,7 +91,18 @@
 <!-- Page level custom scripts -->
 <script
 	src="${pageContext.request.contextPath }/js/demo/datatables-demo.js"></script>
-	
+		
+<script
+	src="${pageContext.request.contextPath }/lib/ckeditor/ckeditor.js"></script>	
+<script
+	src="${pageContext.request.contextPath }/lib/ckeditor/sample.js"></script>
+<script
+	src="${pageContext.request.contextPath }/lib/ckeditor/config.js"></script>
+<script
+	src="${pageContext.request.contextPath }/lib/ckeditor/lang/en.js"></script>
+<script
+	src="${pageContext.request.contextPath }/lib/ckeditor/styles.js"></script>
+</body>
 	
  
 </body>

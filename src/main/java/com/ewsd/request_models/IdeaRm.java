@@ -2,7 +2,9 @@ package com.ewsd.request_models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.ewsd.model.Attachment;
 
@@ -18,7 +20,7 @@ public class IdeaRm implements Serializable  {
 	
 	private String catName;
 	
-	private List<Attachment> attachments = new ArrayList<>();
+	private Set<Attachment> attachments = new HashSet<>();
 	
 	private Boolean isDelete;
 	
@@ -74,11 +76,11 @@ public class IdeaRm implements Serializable  {
 		this.catName = catName;
 	}
 
-	public List<Attachment> getAttachments() {
+	public Set<Attachment> getAttachments() {
 		return attachments;
 	}
 
-	public void setAttachments(List<Attachment> attachments) {
+	public void setAttachments(Set<Attachment> attachments) {
 		this.attachments = attachments;
 	}
 

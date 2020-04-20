@@ -2,7 +2,9 @@ package com.ewsd.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.ewsd.model.Attachment;
 import com.ewsd.model.Category;
@@ -33,7 +35,7 @@ public class IdeaDto implements Serializable {
 
 	private List<Reaction> reactions = new ArrayList<>();
 
-	private List<Attachment> attachments = new ArrayList<>();
+	private Set<Attachment> attachments = new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -123,11 +125,11 @@ public class IdeaDto implements Serializable {
 		this.reactions = reactions;
 	}
 
-	public List<Attachment> getAttachments() {
+	public Set<Attachment> getAttachments() {
 		return attachments;
 	}
 
-	public void setAttachments(List<Attachment> attachments) {
+	public void setAttachments(Set<Attachment> attachments) {
 		this.attachments = attachments;
 	}
 

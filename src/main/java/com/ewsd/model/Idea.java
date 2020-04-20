@@ -47,7 +47,7 @@ public class Idea implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ideaId", cascade = CascadeType.ALL)
 	private List<Reaction> reactions;
 
-	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, targetEntity = Attachment.class)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Attachment.class)
 	@JoinTable(name = "idea_attachments", joinColumns = @JoinColumn(name = "idea_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "attachments_id", referencedColumnName = "id"))
 	private Set<Attachment> attachments;
 

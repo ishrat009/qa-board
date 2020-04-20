@@ -3,12 +3,9 @@ package com.ewsd.model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -78,6 +75,7 @@ public class Attachment implements Serializable{
 		this.fileTitle = fileTitle;
 		this.fileURL = fileURL;
 		this.fileType = fileType;
+	
 	}
 
 	public Attachment() {
@@ -90,6 +88,4 @@ public class Attachment implements Serializable{
 				+ ", fileType=" + fileType + "]";
 	}
 
-	
-	
 }

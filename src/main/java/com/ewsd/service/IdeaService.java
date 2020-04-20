@@ -6,7 +6,9 @@ import java.util.Optional;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ewsd.config.persistence.HibernateConfig;
@@ -24,16 +26,33 @@ public class IdeaService {
 	public IdeaService(HibernateConfig hibernateConfig) {
 		this.hibernateConfig = hibernateConfig;
 	}
-
-
-	public boolean add(Idea ideaEntity) {
-		if(!exists(ideaEntity.getIdeaTitle())) {
-			ideaRepository.save(ideaEntity);
-			return true;
-		}else {
-			return false;
+	@Transactional
+	public void add(Idea ideaEntity) {
+		
+		var session = hibernateConfig.getSession();
+		var transaction = session.getTransaction();
+		if (!transaction.isActive()) {
+			transaction = session.beginTransaction();
 		}
+		//Player playerEntity = new Player();
+	  //  BeanUtils.copyProperties(playerDto,playerEntity);
+		try {
+			session.save(ideaEntity);
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		}
+
 	}
+
+	/*
+	 * public boolean add(Idea ideaEntity) { if(!exists(ideaEntity.getIdeaTitle()))
+	 * { ideaRepository.saveOrUpdate(ideaEntity); ideaRepository.save(ideaEntity);
+	 * return true; }else { return false; } }
+	 */
 	public boolean exists(String name) {
 		if(findByIdeaTitle(name)!=null) {
 			return true;
