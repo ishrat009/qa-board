@@ -25,6 +25,14 @@
   <!--    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
          rel = "stylesheet"> -->
          <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+         
+                  
+  <link href="${pageContext.request.contextPath }/lib/ckeditor/skins/moono-lisa/editor.css" rel="stylesheet" type="text/css">    
+  <link href="${pageContext.request.contextPath }/lib/ckeditor/plugins/scayt/skins/moono-lisa/scayt.css" rel="stylesheet" type="text/css">
+  <link href="${pageContext.request.contextPath }/lib/ckeditor/plugins/scayt/dialogs/dialog.css" rel="stylesheet" type="text/css">
+  <link href="${pageContext.request.contextPath }/lib/ckeditor/plugins/tableselection/styles/tableselection.css" rel="stylesheet" >
+  <link href="${pageContext.request.contextPath }/lib/ckeditor/plugins/wsc/skins/moono-lisa/wsc.css" rel="stylesheet" type="text/css">
+         
 </head>
 
 <body id="page-top">
@@ -146,6 +154,49 @@
           <span>Download Backup File</span></a>
       </li>
 
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+       <!-- Heading -->
+      <div class="sidebar-heading">
+        Co Ordinator
+      </div>
+       <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>All Ideas</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Submit An Issue</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Views All Issue</span></a>
+      </li>
+		<!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Staff
+      </div>
+       <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>All Idea</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="${pageContext.request.contextPath }/idea/add">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Post An Idea</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Timeline</span></a>
+      </li>
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 

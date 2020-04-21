@@ -1,39 +1,47 @@
 package com.ewsd.service;
 
-import com.ewsd.dto.CommentDto;
-import com.ewsd.model.Comment;
-import com.ewsd.model.TermsAndConditions;
-import com.ewsd.repositories.CommentRepository;
+import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import com.ewsd.model.Comment;
+import com.ewsd.model.Idea;
+import com.ewsd.repositories.CommentRepository;
 
 @Service
 public class CommentService {
 
-    @Autowired
-     CommentRepository commentRepository;
+	@Autowired
+	private CommentRepository commentRepository;
+	
+	@Autowired
+	private IdeaService ideaService;
+	
+	@Autowired
+	private UserService userService;
+	
+	/*
+	 * public Comment findOne(Long id) { return commentRepository.findOne(id); }
+	 */
+	
+	public Comment save(Comment comment) {
+		return commentRepository.save(comment);
+	}
+	
+	/*
+	 * public boolean exists(Long userId, Long ideaId) { for(Comment comment :
+	 * ideaService.getById(ideaId).getComments()) {
+	 * if(comment.getUserId().getId().equals(userId)) { return true; } } return
+	 * false; }
+	 * 
+	 * public List<Comment> findAllByIdea(Idea idea){ return
+	 * commentRepository.findAllByIdea(idea); }
+	 * 
+	 * public Comment fetch(Long ideaId, String username) { // TODO Auto-generated
+	 * method stub return
+	 * commentRepository.findByIdeaAndCommentedUser(ideaService.getById(ideaId),
+	 * userService.getUserByName(username)); }
+	 */
 
-
-
-    public void addComment(Comment comment) {
-//        LocalDateTime entry_date = LocalDateTime.now();
-//        CommentDto comm = new CommentDto();
-        comment.setCommentBody(comment.getCommentBody());
-        //        comment.setCommentAt(entry_date);
-
-//        BeanUtils.copyProperties(comm, comment);
-
-
-        commentRepository.save(comment);
-    }
-
-    public List<Comment> getAll() {
-        // TODO Auto-generated method stub
-        return commentRepository.findAll();
-    }
 }

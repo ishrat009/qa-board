@@ -43,6 +43,8 @@ registry.addResourceHandler("/vendor/**").addResourceLocations("/WEB-INF/resourc
 
 // Dist
 registry.addResourceHandler("/scss/**").addResourceLocations("/WEB-INF/resources/scss/");
+
+registry.addResourceHandler("/lib/**").addResourceLocations("/WEB-INF/resources/lib/");
 	}
 	@Bean
     public CommonsMultipartResolver multipartResolver(){

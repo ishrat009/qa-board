@@ -2,7 +2,6 @@ package com.ewsd.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +12,8 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -22,51 +23,51 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_idea")
-public class Idea  implements Serializable {
+public class Idea implements Serializable {
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id", length = 20, nullable = false)
 	private Long id;
-	
+
 	@Column(name = "idea_title", length = 200, nullable = false)
 	private String ideaTitle;
-	
+
 	@Column(name = "idea_body", nullable = false)
 	private String ideaBody;
-	
+
 	@Column(name = "author_email", length = 200, nullable = false)
 	private String authorEmail;
-	
+
 	@Column(name = "total_viws")
 	private Integer countViews = 0;
 
-	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "ideaId", cascade = CascadeType.ALL)
 	private List<Comment> comments;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ideaId", cascade = CascadeType.ALL)
-	private List<Reaction> reacions = new ArrayList<>();
-	
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "idea_attachments")
+	private List<Reaction> reactions;
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Attachment.class)
+	@JoinTable(name = "idea_attachments", joinColumns = @JoinColumn(name = "idea_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "attachments_id", referencedColumnName = "id"))
 	private Set<Attachment> attachments;
-	
+
 	@ManyToOne
 	private Category cat;
-	
-	@ElementCollection(fetch=FetchType.EAGER)
+
+	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "idea_seen_by")
 	private Set<String> seenBy = new HashSet<>();
-	
+
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "user_id", nullable = false)
 	private User userId;
-	
+
 	@Column(name = "e_date")
 	private LocalDateTime entryDate;
-	
+
 	@Column(name = "u_date")
 	private LocalDateTime updateDate;
-	
+
 	@Column(name = "is_delete")
 	private Boolean isDelete;
 
@@ -118,12 +119,12 @@ public class Idea  implements Serializable {
 		this.comments = comments;
 	}
 
-	public List<Reaction> getReacions() {
-		return reacions;
+	public List<Reaction> getReactions() {
+		return reactions;
 	}
 
-	public void setReacions(List<Reaction> reacions) {
-		this.reacions = reacions;
+	public void setReactions(List<Reaction> reactions) {
+		this.reactions = reactions;
 	}
 
 	public Set<Attachment> getAttachments() {
@@ -183,7 +184,7 @@ public class Idea  implements Serializable {
 	}
 
 	public Idea(Long id, String ideaTitle, String ideaBody, String authorEmail, Integer countViews,
-			List<Comment> comments, List<Reaction> reacions, Set<Attachment> attachments, Category cat,
+			List<Comment> comments, List<Reaction> reactions, Set<Attachment> attachments, Category cat,
 			Set<String> seenBy, User userId, LocalDateTime entryDate, LocalDateTime updateDate, Boolean isDelete) {
 		super();
 		this.id = id;
@@ -192,7 +193,7 @@ public class Idea  implements Serializable {
 		this.authorEmail = authorEmail;
 		this.countViews = countViews;
 		this.comments = comments;
-		this.reacions = reacions;
+		this.reactions = reactions;
 		this.attachments = attachments;
 		this.cat = cat;
 		this.seenBy = seenBy;
@@ -209,10 +210,11 @@ public class Idea  implements Serializable {
 	@Override
 	public String toString() {
 		return "Idea [id=" + id + ", ideaTitle=" + ideaTitle + ", ideaBody=" + ideaBody + ", authorEmail=" + authorEmail
-				+ ", countViews=" + countViews + ", comments=" + comments + ", reacions=" + reacions + ", attachments="
-				+ attachments + ", cat=" + cat + ", seenBy=" + seenBy + ", userId=" + userId + ", entryDate="
-				+ entryDate + ", updateDate=" + updateDate + ", isDelete=" + isDelete + "]";
+				+ ", countViews=" + countViews + ", comments=" + comments + ", reactions=" + reactions
+				+ ", attachments=" + attachments + ", cat=" + cat + ", seenBy=" + seenBy + ", userId=" + userId
+				+ ", entryDate=" + entryDate + ", updateDate=" + updateDate + ", isDelete=" + isDelete + "]";
 	}
-	
-	
+
+
+
 }

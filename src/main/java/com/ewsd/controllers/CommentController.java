@@ -1,9 +1,7 @@
 package com.ewsd.controllers;
 
 import com.ewsd.model.Comment;
-import com.ewsd.model.TermsAndConditions;
 import com.ewsd.service.CommentService;
-import com.ewsd.service.TermsAndConditionsService;
 import com.ewsd.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -42,7 +40,7 @@ public class CommentController {
 //        terms.setEntryDate();
 //        terms.setUpdateDate();
 
-        commentService.addComment(comment);
+        commentService.save(comment);
         model.addAttribute("message", "New Comment Added Successfully");
         return "comment/show-all";
 //        return "redirect:/comment/show-all";
@@ -59,7 +57,7 @@ public class CommentController {
         model.addAttribute("username", userName);
         model.addAttribute("comment", new Comment());
 //        model.addAttribute("termsAndConditions", "TermsAndConditions");
-        model.addAttribute("comment_list", commentService.getAll());
+   //     model.addAttribute("comment_list", commentService.getAll());
         model.addAttribute("message", "Showing All Comment");
         return "comment/show-all";
     }
