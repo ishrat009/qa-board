@@ -78,9 +78,9 @@ public class TagService {
 				)
 		);
 		var query = session.getEntityManagerFactory().createEntityManager().createQuery(sc);
-		var dept_list = query.getResultList();
+		var cat_list = query.getResultList();
 
-		return Optional.ofNullable(dept_list.get(0))
+		return Optional.ofNullable(cat_list.get(0))
 				.orElseThrow(() -> new ResourceNotFoundException("Tag Not Found With This Id"));
 	}
 	  public void edit(Category cat) {

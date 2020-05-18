@@ -3,11 +3,17 @@ package com.ewsd.controllers;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +27,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ewsd.customModel.Timeline;
 import com.ewsd.dto.IdeaDto;
 import com.ewsd.model.Attachment;
 import com.ewsd.model.Idea;
 import com.ewsd.request_models.IdeaRm;
+import com.ewsd.request_models.CommentRm;
 import com.ewsd.service.AttachmentService;
 import com.ewsd.service.IdeaService;
 import com.ewsd.service.TagService;
 import com.ewsd.service.UserService;
+import com.ewsd.model.Comment;
+import com.ewsd.model.Reaction;
 
 @Controller
 public class StudentController {
@@ -103,6 +113,7 @@ public class StudentController {
 				}
 				Attachment attachment = new Attachment();
 				Long attachmentId = System.currentTimeMillis();
+				// attachment.setId(attachmentId);
 				attachment.setFileName("" + attachmentId);
 				attachment.setFileTitle(ideaRm.getIdeaTitle());
 				attachment = attachmentService.save(attachment, file, user.getId());
@@ -135,5 +146,49 @@ public class StudentController {
 		model.addAttribute("message", "Showing All Ideas");
 		return "idea/show-all";
 	}
+	@GetMapping("/idea/view_all_ideas")
+	public String view_all_ideas(Model model, Authentication authentication) {
+		var userName = authentication.getName();
+		org.springframework.security.core.userdetails.User authenticateduser = (org.springframework.security.core.userdetails.User) SecurityContextHolder
+				.getContext().getAuthentication().getPrincipal();
+		com.ewsd.model.User user = userService.getUserByName(authenticateduser.getUsername());
+		   Map<String, List<Timeline>> dates = new TreeMap<>(Comparator.reverseOrder());
+
+	        String dateTimeString = "";
+	        for (Idea ideaEntity : ideaService.getAll()) {
+			  dateTimeString = convertTimestampToString(ideaEntity.getEntryDate(), "d/MM/YYYY hh:mm:ss aaa");
+            String time = dateTimeString.split(" ")[1] + " " + dateTimeString.split(" ")[2];
+
+	            List<Comment> comments = new ArrayList<>();
+
+	            for (Comment comment : ideaEntity.getComments()) {            
+	                   // if (user.getRole().equals("ROLE_ADMIN")) {
+	                        comments.add(comment);
+	                     //   break;
+	                   // }
+	              
+	            }
+
+	            ideaEntity.setComments(comments);
+	   
+
+	        }
+	      List<IdeaDto> allIdea = ideaService.getAllIdeaDtoWithCommentAndLike(user.getId());
+		model.addAttribute("user", user);
+		model.addAttribute("username", userName);
+		model.addAttribute("comment", new CommentRm());
+		model.addAttribute("idea_list", allIdea);
+		//model.addAttribute("idea_list2", ideaService.getAll());
+		model.addAttribute("message", "Showing All Ideas");
+		return "idea/view_all_ideas";
+	}
+	  public String convertTimestampToString(LocalDateTime timestamp, String format) {
+	        Date date = new Date();
+	        date.setTime(Timestamp.valueOf(LocalDateTime.now()).getTime());
+	        String formattedDate = new SimpleDateFormat(format).format(date);
+	        return formattedDate;
+	    }
+
 	
+
 }

@@ -15,6 +15,7 @@
 
   <title>ewsd</title>
 
+
   <!-- Custom fonts for this template-->
   <link href="${pageContext.request.contextPath }/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -24,15 +25,14 @@
   <link href="${pageContext.request.contextPath }/css/sb-admin-2.min.css" rel="stylesheet">
   <!--    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
          rel = "stylesheet"> -->
-         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
          
-                  
+         
   <link href="${pageContext.request.contextPath }/lib/ckeditor/skins/moono-lisa/editor.css" rel="stylesheet" type="text/css">    
   <link href="${pageContext.request.contextPath }/lib/ckeditor/plugins/scayt/skins/moono-lisa/scayt.css" rel="stylesheet" type="text/css">
   <link href="${pageContext.request.contextPath }/lib/ckeditor/plugins/scayt/dialogs/dialog.css" rel="stylesheet" type="text/css">
   <link href="${pageContext.request.contextPath }/lib/ckeditor/plugins/tableselection/styles/tableselection.css" rel="stylesheet" >
   <link href="${pageContext.request.contextPath }/lib/ckeditor/plugins/wsc/skins/moono-lisa/wsc.css" rel="stylesheet" type="text/css">
-         
 </head>
 
 <body id="page-top">
@@ -78,44 +78,23 @@
        
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link"  href="${pageContext.request.contextPath }/batch/show-all">
           <i class="fas fa-fw fa-cog"></i>
           <span>Manage Batch</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="${pageContext.request.contextPath }/batch/add">Add Batch</a>
-            <a class="collapse-item" href="${pageContext.request.contextPath }/batch/show-all">Show All </a>
-          </div>
-        </div>
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link" href="${pageContext.request.contextPath }/department/list">
           <i class="fas fa-fw fa-wrench"></i>
           <span>Manage Department</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">    
-            <a class="collapse-item" href="${pageContext.request.contextPath }/department/add">Add Department</a>
-            <a class="collapse-item" href="${pageContext.request.contextPath }/department/add">Show All</a>
-          
-          </div>
-        </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Set Terms And Conditions</span>
-        </a>
-        <div id="collapsePage" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-
-            <a class="collapse-item" href="${pageContext.request.contextPath }/termsAndCon/add">Add Terms and Condition</a>
-            <a class="collapse-item" href="${pageContext.request.contextPath }/termsAndCon/show-all">Show All</a>
-          </div>
-        </div>
+   <li class="nav-item">
+        <a class="nav-link" href="">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Set Terms And Conditions</span></a>
       </li>
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -127,17 +106,11 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link" href="${pageContext.request.contextPath }/category/show-all" >
           <i class="fas fa-fw fa-folder"></i>
           <span>Manage Category</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-
-            <a class="collapse-item" href="${pageContext.request.contextPath }/category/add">Add Category</a>
-            <a class="collapse-item" href="${pageContext.request.contextPath }/category/show-all">Show All</a>
-          </div>
-        </div>
+      
       </li>
 
       <!-- Nav Item - Charts -->
@@ -153,15 +126,15 @@
           <i class="fas fa-fw fa-table"></i>
           <span>Download Backup File</span></a>
       </li>
+      	<!-- Divider -->
+      <hr class="sidebar-divider">
 
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
-       <!-- Heading -->
+      <!-- Heading -->
       <div class="sidebar-heading">
         Co Ordinator
       </div>
        <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="${pageContext.request.contextPath }/idea/view_all_ideas">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>All Ideas</span></a>
       </li>
@@ -183,9 +156,9 @@
         Staff
       </div>
        <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="${pageContext.request.contextPath }/idea/view_all_ideas">
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>All Idea</span></a>
+          <span>All Ideas</span></a>
       </li>
        <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath }/idea/add">
@@ -349,7 +322,7 @@
                   </div>
                   <div class="font-weight-bold">
                     <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
-                    <div class="small text-gray-500">Emily Fowler · 58m</div>
+                    <div class="small text-gray-500">Emily Fowler Â· 58m</div>
                   </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -359,7 +332,7 @@
                   </div>
                   <div>
                     <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
-                    <div class="small text-gray-500">Jae Chun · 1d</div>
+                    <div class="small text-gray-500">Jae Chun Â· 1d</div>
                   </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -369,7 +342,7 @@
                   </div>
                   <div>
                     <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
-                    <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                    <div class="small text-gray-500">Morgan Alvarez Â· 2d</div>
                   </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -379,7 +352,7 @@
                   </div>
                   <div>
                     <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
-                    <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                    <div class="small text-gray-500">Chicken the Dog Â· 2w</div>
                   </div>
                 </a>
                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
