@@ -10,6 +10,7 @@ import com.ewsd.model.Attachment;
 import com.ewsd.model.Category;
 import com.ewsd.model.Comment;
 import com.ewsd.model.Reaction;
+import com.ewsd.model.User;
 
 public class IdeaDto implements Serializable {
 
@@ -22,20 +23,26 @@ public class IdeaDto implements Serializable {
 	private Category cat;
 
 	private Boolean isDelete;
-	
+
 	private long totalLikes;
-	
+
 	private long totalDislikes;
 	
 	private long totalComment;
 	
 	private Integer reactionType;
 	
+	private Boolean isLiked;
+	
+	private Boolean isDisliked;
+	
 	private List<Comment> comments = new ArrayList<>();
 
 	private List<Reaction> reactions = new ArrayList<>();
 
 	private Set<Attachment> attachments = new HashSet<>();
+	
+	private User userId;
 
 	public Long getId() {
 		return id;
@@ -109,6 +116,22 @@ public class IdeaDto implements Serializable {
 		this.reactionType = reactionType;
 	}
 
+	public Boolean getIsLiked() {
+		return isLiked;
+	}
+
+	public void setIsLiked(Boolean isLiked) {
+		this.isLiked = isLiked;
+	}
+
+	public Boolean getIsDisliked() {
+		return isDisliked;
+	}
+
+	public void setIsDisliked(Boolean isDisliked) {
+		this.isDisliked = isDisliked;
+	}
+
 	public List<Comment> getComments() {
 		return comments;
 	}
@@ -133,12 +156,23 @@ public class IdeaDto implements Serializable {
 		this.attachments = attachments;
 	}
 
+	public User getUserId() {
+		return userId;
+	}
+
+	public void setUserId(User userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public String toString() {
 		return "IdeaDto [id=" + id + ", ideaTitle=" + ideaTitle + ", ideaBody=" + ideaBody + ", cat=" + cat
 				+ ", isDelete=" + isDelete + ", totalLikes=" + totalLikes + ", totalDislikes=" + totalDislikes
-				+ ", totalComment=" + totalComment + ", reactionType=" + reactionType + ", comments=" + comments
-				+ ", reactions=" + reactions + ", attachments=" + attachments + "]";
+				+ ", totalComment=" + totalComment + ", reactionType=" + reactionType + ", isLiked=" + isLiked
+				+ ", isDisliked=" + isDisliked + ", comments=" + comments + ", reactions=" + reactions
+				+ ", attachments=" + attachments + ", userId=" + userId + "]";
 	}
-	
+
+
+
 }

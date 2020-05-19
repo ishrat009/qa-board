@@ -52,7 +52,8 @@ public class QAManagerController {
 		 org.springframework.security.core.userdetails.User authenticateduser  = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 com.ewsd.model.User user = userService.getUserByName(authenticateduser.getUsername());
 		 
-		System.out.println(catRm.toString());
+		System.out.println("Test");
+		System.out.println(catRm.getDeptId());
 		var deptId = departmentService.getById(catRm.getDeptId());
 		System.out.println(deptId);
 		CategoryDto catDto = new CategoryDto();

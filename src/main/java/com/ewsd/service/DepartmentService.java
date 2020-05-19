@@ -63,6 +63,7 @@ public class DepartmentService {
 		if (!transaction.isActive()) {
 			transaction = session.beginTransaction();
 		}
+		//System.out.println("Department start :"+deptId);
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<Department> criteriaQuery = criteriaBuilder.createQuery(Department.class);
 		Root<Department> root = criteriaQuery.from(Department.class);
@@ -75,7 +76,8 @@ public class DepartmentService {
 		);
 		var query = session.getEntityManagerFactory().createEntityManager().createQuery(criteriaQuery);
 		var dept_list = query.getResultList();
-		
+		System.out.println("Department");
+		System.out.println(dept_list);
 		return Optional.ofNullable(dept_list.get(0))
 				.orElseThrow(() -> new ResourceNotFoundException("No department was found with this ID!"));
 	}

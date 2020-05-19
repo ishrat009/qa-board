@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.ewsd.model.Attachment;
+import com.ewsd.model.User;
 
 public class IdeaRm implements Serializable  {
 	
@@ -34,8 +35,16 @@ public class IdeaRm implements Serializable  {
 	
 	private long totalComment;
 	
-	private Integer reactionType;
+	public User getUserId() {
+		return userId;
+	}
 
+	public void setUserId(User userId) {
+		this.userId = userId;
+	}
+
+	private Integer reactionType;
+	private User userId;
 	public Long getId() {
 		return id;
 	}
